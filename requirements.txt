@@ -1,0 +1,13 @@
+langgraph>=0.0.40
+langchain>=0.1.14
+langchain-community>=0.0.30
+langchain-core>=0.1.30
+langchain-huggingface>=0.1.2
+huggingface-hub>=0.20.3
+duckduckgo-search>=4.1.1
+pydantic>=2.6.0
+pytest
+python-dotenv
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+sse-starlette>=2.0.0
