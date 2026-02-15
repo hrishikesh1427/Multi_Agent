@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import AgentCard from "./AgentCard";
 import type { AgentInfo, SSEEvent } from "./types";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 const INITIAL_AGENTS: AgentInfo[] = [
   { name: "Research Agent", status: "idle" },
   { name: "Analysis Agent", status: "idle" },
@@ -82,7 +84,7 @@ export default function App() {
     eventSourceRef.current?.close();
 
     try {
-      const res = await fetch("/run", {
+      const res = await fetch(`${API_URL}/run`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),
@@ -92,7 +94,7 @@ export default function App() {
 
       const { run_id } = await res.json();
 
-      const es = new EventSource(`/events/${run_id}`);
+      const es = new EventSource(`${API_URL}/events/${run_id}`);
       eventSourceRef.current = es;
 
       es.onmessage = (ev) => {

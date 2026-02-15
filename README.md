@@ -86,10 +86,27 @@ python app/main.py
 ```bash
 cd frontend
 npm install
+```
+
+Create a `.env` file in the `frontend` directory:
+
+```
+VITE_API_URL=http://localhost:8000
+```
+
+For production (deployed backend):
+
+```
+VITE_API_URL=https://multi-agent-fkgd.onrender.com
+```
+
+Start the dev server:
+
+```bash
 npm run dev
 ```
 
-The dev server runs on `http://localhost:5173` and proxies API calls to port 8000.
+The dev server runs on `http://localhost:5173`.
 
 ## API Endpoints
 
@@ -104,6 +121,29 @@ The dev server runs on `http://localhost:5173` and proxies API calls to port 800
 ```bash
 pytest tests/
 ```
+
+## Deployment
+
+### Backend (Render)
+
+The backend is deployed at: https://multi-agent-fkgd.onrender.com
+
+1. Connect your GitHub repository to Render
+2. Create a new Web Service
+3. Set environment variable: `HUGGINGFACEHUB_API_TOKEN`
+4. Build command: `pip install -r requirements.txt`
+5. Start command: `uvicorn app.server:app --host 0.0.0.0 --port $PORT`
+
+### Frontend (Vercel)
+
+1. Push your code to GitHub
+2. Import the project to Vercel
+3. Set **Root Directory** to `frontend`
+4. Add environment variable:
+   - `VITE_API_URL` = `https://multi-agent-fkgd.onrender.com`
+5. Deploy
+
+Vercel auto-detects Vite and configures build settings.
 
 ## License
 
